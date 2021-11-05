@@ -4,15 +4,17 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class baseball {
-    public void start() {
+    public void start(){
 
-
-        System.out.println("\t숫자 야구 게임을 시작합니다 -> \t");
-
+        System.out.println("\t숫자 야구 게임을 시작합니다\t");
         ArrayList<Integer> answer = random();
         chk(answer);
 
     }
+
+
+
+    //임의의 중복되지 않은 4개의 숫자 생성 (0~9까지의 난수)
     public ArrayList<Integer> random(){
         HashSet<Integer> ans = new HashSet<>();
         int cnt = 0;
@@ -27,6 +29,9 @@ public class baseball {
         ArrayList<Integer> answer = new ArrayList<>(ans);
         return answer;
     }
+
+    // user로부터 4개의 입력을 받는 메소드
+
     public String input(){
         System.out.println("------------------------------------");
         System.out.println("정답을 입력해 주세요.(숫자 4자리)");
@@ -58,14 +63,24 @@ public class baseball {
         }
 
     }
-    int chk(ArrayList<Integer> answer) {
+
+    int chk(ArrayList<Integer> answer){
         int ball = 0;
         int strike = 0;
+        int cnt = 1;
 
-        while (true) {
+
+        while(true){
             ArrayList<Integer> userInput = new ArrayList<>();
 
+            if(cnt > 100){
+                return -1;
+            }
+
+
             String input = input();
+
+
 
             System.out.println("내가 입력한 정답 : " + input);
             for(int i=0; i<input.length(); i++){
@@ -82,18 +97,16 @@ public class baseball {
             }
             if(strike == 4){
                 System.out.println();
-                System.out.println(" 승리 ");
+                System.out.println("정답");
                 System.out.println();
 
-
+                return cnt;
             }
-            System.out.println("B -> " + ball);
-            System.out.println("S -> " + ball);
+            System.out.println(ball + " Ball");
+            System.out.println(strike + " Strike");
             ball = 0;
             strike = 0;
-
+            cnt++;
         }
-
-
-        }
+    }
     }
